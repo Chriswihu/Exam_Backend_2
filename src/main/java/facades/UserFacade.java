@@ -1,5 +1,6 @@
 package facades;
 
+import dtos.MovieDTO;
 import entities.Role;
 import entities.User;
 import javax.persistence.EntityManager;
@@ -91,6 +92,13 @@ public class UserFacade {
             em.close();
         }
         return UserDTO.getDtos(users);
+    }
+
+    public List<MovieDTO> getUserMovies(String username){
+        EntityManager em = getEntityManager();
+        TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.userName = :username", User.class).setParameter("username", username);
+        User user = query.getSingleResult();
+        return MovieDTO.getDtos(user.getMovies());
     }
 
     public UserDTO getUserDtoByUsername(String username) {

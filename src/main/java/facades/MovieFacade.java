@@ -41,14 +41,15 @@ public class MovieFacade {
 
     public MovieDTO create(MovieDTO movie) {
         EntityManager em = getEntityManager();
+        Movie newMovie = new Movie(movie.getName(), movie.getDuration(), movie.getLocation(), movie.getStartDate(), movie.getStartTime());
         try {
             em.getTransaction().begin();
-            em.persist(movie);
+            em.persist(newMovie);
             em.getTransaction().commit();
         } finally {
             em.close();
         }
-        return movie;
+        return new MovieDTO(newMovie);
     }
     
     public List<MovieDTO> getAllMovies() {
@@ -115,16 +116,15 @@ public class MovieFacade {
 
     public MovieDTO deleteMovie(long id) {
         EntityManager em = getEntityManager();
-        MovieDTO movie;
+        Movie movie = em.find(Movie.class, id);
         try {
             em.getTransaction().begin();
-            movie = em.find(MovieDTO.class, id);
             em.remove(movie);
             em.getTransaction().commit();
         } finally {
             em.close();
         }
-        return movie;
+        return new MovieDTO(movie);
     }
 
 }

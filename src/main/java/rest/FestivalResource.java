@@ -3,6 +3,7 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dtos.FestivalDTO;
+import entities.Festival;
 import facades.FestivalFacade;
 import utils.EMF_Creator;
 
@@ -34,9 +35,11 @@ public class FestivalResource {
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     public Response addFestival(String festival) {
-        FestivalDTO f = GSON.fromJson(festival, FestivalDTO.class);
-        FestivalDTO festivalAdded = FACADE.create(f);
-        return Response.ok(GSON.toJson(festivalAdded)).build();
+        Festival newFestival = GSON.fromJson(festival, Festival.class);
+        FestivalDTO festivalDTO = new FestivalDTO(newFestival);
+        FestivalDTO festivalAdded = FACADE.create(festivalDTO);
+        String response = GSON.toJson(festivalAdded);
+        return Response.status(Response.Status.CREATED).entity(response).build();
     }
 
     @GET

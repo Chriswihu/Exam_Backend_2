@@ -42,6 +42,14 @@ public class UserResource {
     @Path("all")
     public String allUsers() {return GSON.toJson(FACADE.getAllUsers());}
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{userName}")
+    public String getUserMovies(@PathParam("userName") String userName) {
+        return GSON.toJson(FACADE.getUserMovies(userName));
+
+    }
+
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)

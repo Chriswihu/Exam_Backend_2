@@ -40,14 +40,15 @@ public class FestivalFacade {
 
     public FestivalDTO create(FestivalDTO festival) {
         EntityManager em = getEntityManager();
+        Festival newFestival = new Festival(festival.getName(), festival.getCity(), festival.getStartDate(), festival.getDuration());
         try {
             em.getTransaction().begin();
-            em.persist(festival);
+            em.persist(newFestival);
             em.getTransaction().commit();
         } finally {
             em.close();
         }
-        return festival;
+        return new FestivalDTO(newFestival);
     }
 
     public List<FestivalDTO> getAllFestivals() {

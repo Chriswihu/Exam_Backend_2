@@ -3,6 +3,7 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dtos.MovieDTO;
+import entities.Movie;
 import facades.MovieFacade;
 import utils.EMF_Creator;
 
@@ -34,9 +35,11 @@ public class MovieResoure {
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     public Response addMovie(String movie) {
-        MovieDTO m = GSON.fromJson(movie, MovieDTO.class);
-        MovieDTO movieAdded = FACADE.create(m);
-        return Response.ok(GSON.toJson(movieAdded)).build();
+        Movie newMovie = GSON.fromJson(movie, Movie.class);
+        MovieDTO movieDTO = new MovieDTO(newMovie);
+        MovieDTO movieAdded = FACADE.create(movieDTO);
+        String response = GSON.toJson(movieAdded);
+        return Response.status(Response.Status.CREATED).entity(response).build();
     }
 
     @GET
