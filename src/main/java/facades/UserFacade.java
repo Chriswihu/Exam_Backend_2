@@ -1,6 +1,7 @@
 package facades;
 
 import dtos.MovieDTO;
+import entities.Movie;
 import entities.Role;
 import entities.User;
 import javax.persistence.EntityManager;
@@ -99,6 +100,23 @@ public class UserFacade {
         TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.userName = :username", User.class).setParameter("username", username);
         User user = query.getSingleResult();
         return MovieDTO.getDtos(user.getMovies());
+    }
+
+    public UserDTO addMovieToUser(String username, Long movieId) {
+        EntityManager em = getEntityManager();
+        TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.userName = :username", User.class).setParameter("username", username);
+        User user = query.getSingleResult();
+        TypedQuery<Movie> query2 = em.createQuery("SELECT m FROM Movie m WHERE m.id = :movieId", Movie.class).setParameter("movieId", movieId);
+        Movie movie = query2.getSingleResult();
+        user.addMovie(new Movie(movie.getName(), movie.getDuration(), movie.getLocation(), movie.getStartDate(), movie.getStartTime()));
+        try {
+            em.getTransaction().begin();
+            em.merge(user);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+        return new UserDTO(user);
     }
 
     public UserDTO getUserDtoByUsername(String username) {

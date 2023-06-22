@@ -2,6 +2,8 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dtos.MovieDTO;
+import entities.Movie;
 import entities.User;
 import dtos.UserDTO;
 import facades.UserFacade;
@@ -70,16 +72,17 @@ public class UserResource {
 //        return Response.ok(user).build();
 //    }
 
-    @PUT
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Path("edit/{username}")
-    public Response editUser(@PathParam("username") String username, String jsonUser) {
-        UserDTO updatedUser = GSON.fromJson(jsonUser, UserDTO.class);
-        UserDTO editedUser = FACADE.editUser(username, updatedUser);
-        return Response.ok(editedUser).build();
-
-    }
+//    @PUT
+//    @Produces(MediaType.APPLICATION_JSON)
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    @Path("addMovie/{username}")
+//    public Response addMovie(@PathParam("username") String username, Long movieId) {
+//        User user = GSON.fromJson(username, User.class);
+//        Movie movie = GSON.fromJson(String.valueOf(movieId), Movie.class);
+//        user.addMovie(movie);
+//        return Response.ok(user).build();
+//
+//    }
 
 
 
