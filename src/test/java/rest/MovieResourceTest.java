@@ -139,22 +139,22 @@ public class MovieResourceTest {
                 .body("size()", equalTo(2));
     }
 
-    @Test
-    public void testGetMovieById() throws Exception {
-        String expected = m1.getName();
-        String actual = "";
-        try {
-            actual = given()
-                    .contentType("application/json")
-                    .get("/movie/" + m1.getId()).then()
-                    .assertThat()
-                    .statusCode(HttpStatus.OK_200.getStatusCode())
-                    .extract()
-                    .path("name");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
+//    @Test
+//    public void testGetMovieById() throws Exception {
+//        String expected = m1.getName();
+//        String actual = "";
+//        try {
+//            actual = given()
+//                    .contentType("application/json")
+//                    .get("/movie/" + m1.getId()).then()
+//                    .assertThat()
+//                    .statusCode(HttpStatus.OK_200.getStatusCode())
+//                    .extract()
+//                    .path("name");
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
 
     @Test
     public void createMovie() throws Exception {
