@@ -34,57 +34,39 @@ public class SetupTestUsers {
     both.addRole(userRole);
     both.addRole(adminRole);
 
-//    Guest userGuest = new Guest(user, "12345678", "Mail.com", "OK");
-//    Guest adminGuest = new Guest(admin, "12345678", "Mail.com", "OK");
-//    Guest bothGuest = new Guest(both, "12345678", "Mail.com", "OK");
-
     Movie movie1 = new Movie("Show1", "3 timer", "Bykøbing Øst", "11/11-11", "11:00");
     Movie movie2 = new Movie("Show2", "2 timer", "Bykøbing Vest", "12/11-11", "13:00");
     Movie movie3 = new Movie("Show3", "4 timer", "Bykøbing Syd", "13/11-11", "12:00");
-//
-//    Show show4 = new Show("Show4", "3 timer", "Bykøbing Øst", "11/11-11", "11:00");
+    Movie movie4 = new Movie("Show4", "1 timer", "Bykøbing Nord", "14/11-11", "14:00");
 
     user.addMovie(movie1);
     user.addMovie(movie2);
+    user.addMovie(movie3);
     admin.addMovie(movie2);
     admin.addMovie(movie3);
+    admin.addMovie(movie4);
     both.addMovie(movie3);
+    both.addMovie(movie4);
 
     Festival festival1 = new Festival("Festival1", "Bykøbing Øst", "11/11-11", 2);
     Festival festival2 = new Festival("Festival2", "Bykøbing Vest", "12/11-11", 3);
+    Festival festival3 = new Festival("Festival3", "Bykøbing Syd", "13/11-11", 4);
+    Festival festival4 = new Festival("Festival4", "Bykøbing Nord", "14/11-11", 5);
 
     festival1.addUser(user);
+    festival2.addUser(user);
     festival2.addUser(admin);
-    festival1.addUser(both);
-    festival2.addUser(both);
+    festival3.addUser(admin);
+    festival3.addUser(both);
+    festival4.addUser(both);
 
 
     em.getTransaction().begin();
 
-//    user.addShow(show1);
-//    user.addShow(show2);
-//    admin.addShow(show2);
-//    admin.addShow(show3);
-//    both.addShow(show3);
-//
-//    user.setFestival(festival1);
-//    admin.setFestival(festival2);
-//    both.setFestival(festival1);
-//    both.setFestival(festival2);
-//
-//
-//
-//
-//    em.persist(userRole);
-//    em.persist(adminRole);
     em.persist(user);
     em.persist(admin);
     em.persist(both);
-//    em.persist(show1);
-//    em.persist(show2);
-//    em.persist(show3);
-//    em.persist(festival1);
-//    em.persist(festival2);
+
     em.getTransaction().commit();
     System.out.println("PW: " + user.getUserPass());
     System.out.println("Testing user with OK password: " + user.verifyPassword("test"));
