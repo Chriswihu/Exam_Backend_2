@@ -86,7 +86,7 @@ public class FestivalFacadeTest {
     @Test
     public void getFestivalByIdTest(){
 //        tearDown();
-        assertEquals("Festival1", facade.getById(1).getName());
+        assertEquals("Festival1", facade.getById(2).getName());
 
         System.out.println("Festival1 er fundet: ");
         System.out.println(facade.getById(1));

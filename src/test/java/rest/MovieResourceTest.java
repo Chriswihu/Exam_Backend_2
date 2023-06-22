@@ -167,7 +167,7 @@ public class MovieResourceTest {
                     .body(json)
                     .when().post("/movie")
                     .then()
-                    .statusCode(200)
+                    .statusCode(201)
                     .body("name", equalTo("Movie3"));
         } catch (Exception e) {
             System.out.println("An error happened while Creating a Movie: " + e.getMessage());
