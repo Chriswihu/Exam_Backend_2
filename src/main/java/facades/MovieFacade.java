@@ -79,7 +79,7 @@ public class MovieFacade {
         return movies;
     }
 
-    public MovieDTO getMovieById(Long id) {
+    public MovieDTO getMovieById(long id) {
         EntityManager em = getEntityManager();
         Movie movie;
         try {

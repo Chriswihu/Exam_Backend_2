@@ -89,7 +89,7 @@ public class MovieFacadeTest {
     @Test
     public void getMovieByIdTest(){
 //        tearDown();
-        assertEquals("Movie1", facade.getMovieById(1L).getName());
+        assertEquals("Movie1", facade.getMovieById(1).getName());
     }
 
 
