@@ -1,10 +1,10 @@
 GET http://localhost:8080/dat3_exam_2/api/info
 
 ###
-GET http://localhost:8080/dat3_exam_2/api/user/user
+GET http://localhost:8080/dat3_exam_2/api/user/userName/user
 
 ###
-GET http://localhost:8080/dat3_exam_2/api/movie/all
+GET http://localhost:8080/dat3_exam_2/api/movie/1
 
 ###
 GET http://localhost:8080/dat3_exam_2/api/festival/all

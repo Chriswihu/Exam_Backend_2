@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "movie")
-//@NamedQuery(name = "Show.deleteAllRows", query = "DELETE from Show")
+@NamedQuery(name = "Movie.deleteAllRows", query = "DELETE from Movie ")
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

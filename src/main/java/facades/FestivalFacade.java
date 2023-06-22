@@ -66,8 +66,13 @@ public class FestivalFacade {
 
     public FestivalDTO getById(long id) { //throws RenameMeNotFoundException {
         EntityManager em = emf.createEntityManager();
-        FestivalDTO festival = em.find(FestivalDTO.class, id);
-        return festival;
+        Festival festival = em.find(Festival.class, id);
+        try {
+            return new FestivalDTO(festival);
+        } finally {
+            em.close();
+        }
+
     }
 
     public FestivalDTO editFestival(FestivalDTO festival) {

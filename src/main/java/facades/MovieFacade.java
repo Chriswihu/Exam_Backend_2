@@ -70,29 +70,24 @@ public class MovieFacade {
         List<MovieDTO> movies;
         try {
             TypedQuery<MovieDTO> query
-                    = em.createQuery("SELECT m FROM Movie m WHERE m JOIN m.users u WHERE u.userName = :userName", MovieDTO.class).setParameter("userName", user.getUserName());
+                    = em.createQuery("SELECT m FROM Movie m JOIN m.users u WHERE u.userName = :userName", MovieDTO.class).setParameter("userName", user.getUserName());
             query.setParameter("username", user.getUserName());
             movies = query.getResultList();
-        } catch (Exception e) {
-            movies = null;
         } finally {
             em.close();
         }
         return movies;
     }
 
-    public MovieDTO getMovieById(long id) {
+    public MovieDTO getMovieById(Long id) {
         EntityManager em = getEntityManager();
-        MovieDTO movie;
+        Movie movie;
         try {
-            TypedQuery<MovieDTO> query
-                    = em.createQuery("SELECT m FROM Movie m WHERE m.id = :id", MovieDTO.class);
-            query.setParameter("id", id);
-            movie = query.getSingleResult();
+            movie = em.find(Movie.class, id);
         } finally {
             em.close();
         }
-        return movie;
+        return new MovieDTO(movie);
     }
 
     public MovieDTO editMovie(MovieDTO movie) {
