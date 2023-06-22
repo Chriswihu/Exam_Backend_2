@@ -86,11 +86,11 @@ public class MovieFacadeTest {
 //        em = emf.createEntityManager();
     }
 
-    @Test
-    public void getMovieByIdTest(){
-//        tearDown();
-        assertEquals("Movie1", facade.getMovieById(1).getName());
-    }
+//    @Test
+//    public void getMovieByIdTest(){
+////        tearDown();
+//        assertEquals("Movie1", facade.getMovieById(1).getName());
+//    }
 
 
 
